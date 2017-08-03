@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="SimpleEngine" package="com.sample.simpleEngine" version="1.0.0" company="OWC" />
+	<app main="Main" path="Export" file="SimpleEngine" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	
+	<assets path="Assets" rename="assets" />
+	
+	<window width="800" height="600" resizable="false"/>
+</project>
