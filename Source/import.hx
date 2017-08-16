@@ -8,6 +8,7 @@ import openfl.geom.*;
 
 import simpleEngine.*;
 import simpleEngine.core.entitySystem.entities.*;
+import simpleEngine.core.entitySystem.entities.interfaces.*;
 import simpleEngine.core.entitySystem.*;
 import simpleEngine.core.resources.*;
 import simpleEngine.core.domain.*;

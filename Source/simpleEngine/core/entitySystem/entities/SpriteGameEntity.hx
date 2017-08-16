@@ -34,11 +34,9 @@ class SpriteGameEntity extends GameEntity{
 		this.bitmap = new Bitmap(bitmapData);
 		if (rectangle == null) Rect = new Rectangle(0, 0, this.bitmap.width, this.bitmap.height);
 		else Rect = rectangle;
-		trace(xpos);
-		trace(ypos);
+		super(xpos, ypos);
 		X = xpos;
 		Y = ypos;
-		super();
 	}
 
 	public function renderAt(container : DisplayObjectContainer){
