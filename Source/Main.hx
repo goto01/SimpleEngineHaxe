@@ -2,29 +2,55 @@ package;
 
 class Main extends Sprite {	
 	private var container : SimpleContainer;
-	private var sprite : SpriteGameEntity;
 	private var index = 0;
 	private var scale = 1;
 	private var bitmap : Bitmap;
 
+	private var texture : SETexture;
+	private var sprite : SESprite;
+	private var task : Task;
+	private var taskHandler : TaskHandler;
+
+	private var game : Game;
+
 	public function new () {
-		var bitmapTitle = Assets.getBitmapData("assets/GFX/title.png");
-		var bitmapData = Assets.getBitmapData("assets/GFX/tiles.png");
+		#if mydebug
+		trace("SSS");
+		#end
 		super();
-		bitmap = new Bitmap();
-		bitmap.bitmapData = bitmapTitle;
-		addChild(bitmap);
-		Lib.current.stage.addEventListener(MouseEvent.CLICK, clickEventHandler);
-		Lib.current.stage.addEventListener(MouseEvent.RIGHT_CLICK, rightClickEventHandler);
-		Lib.current.stage.addEventListener(Event.ENTER_FRAME, update);
-		Lib.current.x = Lib.current.stage.window.width/2 - 200*scale;
-		Lib.current.y = Lib.current.stage.window.height/2 - 150*scale;
-		Lib.current.scrollRect = new Rectangle(0, 0, 400, 300);
+		game = new Game();
+
+		var bitmapTitle = Assets.getBitmapData("assets/GFX/title.png", false);
+		var tilesBitmapData = Assets.getBitmapData("assets/GFX/tiles.png", false);
+		
+		taskHandler = new TaskHandler();
+		task = taskHandler.startTask(threadMethod, onComplete, [1, "string123", bitmapTitle], 100);
+		texture = new SETexture(tilesBitmapData, "assets/GFX/tiles.png");
+		sprite = texture.getSprite(new Rectangle(0, 0, 0, 32));
+		addChild(sprite.Bitmap);
+
+		initStage();
 	}
-	
+
+	private function threadMethod(progress : Progress, parameters : Array<Dynamic>){
+		trace(parameters.length);
+		var bitmap : BitmapData = parameters[2];
+		trace(bitmap.getPixel(10, 10));
+		for (i in 0...100000000){
+				(progress.Value = i/100000000);
+		}
+		trace("f");
+	}
+
+	private function onComplete(){
+		trace("Complted");
+	}
+
 	private function clickEventHandler(event : MouseEvent){
-		var bitmapData = Assets.getBitmapData("assets/GFX/tiles.png");
-		bitmap.bitmapData = bitmapData;
+		
+		//var bitmapData = Assets.getBitmapData("assets/GFX/tiles.png", false);
+		//bitmap.bitmapData = bitmapData;
+		//sprite.BitmapData = tilesBitmapData;
 	}
 
 	private function rightClickEventHandler(event : MouseEvent){
@@ -36,8 +62,22 @@ class Main extends Sprite {
 	}
 
 	private function update(event : Event){
+		taskHandler.update();
+		game.update();
+		var r = sprite.Rect;
+		r.width = 300 * task.Progress.Value;
+		sprite.Rect = r;
 		//trace(Timer.stamp());
 		//sprite.X = 35 + Std.int(Math.sin(Timer.stamp()*10)*100);
 		//sprite.Y = 50 + Std.int(Math.cos(Timer.stamp()*10)*100);
+	}
+
+	private function initStage(){
+		Lib.current.stage.addEventListener(MouseEvent.CLICK, clickEventHandler);
+		Lib.current.stage.addEventListener(MouseEvent.RIGHT_CLICK, rightClickEventHandler);
+		Lib.current.stage.addEventListener(Event.ENTER_FRAME, update);
+		Lib.current.x = Lib.current.stage.window.width/2 - 200*scale;
+		Lib.current.y = Lib.current.stage.window.height/2 - 150*scale;
+		Lib.current.scrollRect = new Rectangle(0, 0, 400, 300);
 	}
 }

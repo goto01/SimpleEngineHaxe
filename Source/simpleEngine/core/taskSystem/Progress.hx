@@ -5,6 +5,7 @@ class Progress {
 
 	public var Value(get, set) : Float;
 	public var TotalValue(default, null) : Float;
+	public var Completed(default, default) : Bool;
 
 	private function get_Value() : Float{
 		return value;
@@ -17,5 +18,6 @@ class Progress {
 	public function new(totalValue : Float){
 		TotalValue = totalValue;
 		Value = 0;
+		Completed = false;
 	}
 }
