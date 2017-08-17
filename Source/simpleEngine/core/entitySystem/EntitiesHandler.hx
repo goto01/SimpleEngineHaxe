@@ -35,7 +35,7 @@ class EntitiesHandler{
 		for (service in services.iterator()) service.start();
 	}
 
-	public function addEntity<T:IEntity>(entity : T){
+	public function addEntity(entity : IEntity){
 		entities.add(entity);
 	}
 }

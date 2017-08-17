@@ -19,7 +19,7 @@ class Game{
 		entitiesHandler.update();
 	}
 
-	public function addEntity<T:IEntity>(entity : T){
+	public function addEntity(entity : IEntity){
 		entitiesHandler.addEntity(entity);
 	}
 }
