@@ -15,6 +15,7 @@ import simpleEngine.core.domain.*;
 import simpleEngine.core.taskSystem.*;
 
 import game.entities.*;
+import game.services.*;
 
 import haxe.*;
 import flash.system.System;

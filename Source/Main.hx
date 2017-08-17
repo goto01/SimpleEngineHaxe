@@ -11,43 +11,25 @@ class Main extends Sprite {
 	private var task : Task;
 	private var taskHandler : TaskHandler;
 
-	private var game : Game;
-
 	public function new () {
-		#if mydebug
-		trace("SSS");
-		#end
 		super();
-		game = new Game();
 
 		var bitmapTitle = Assets.getBitmapData("assets/GFX/title.png", false);
 		var tilesBitmapData = Assets.getBitmapData("assets/GFX/tiles.png", false);
 		
-		
 		texture = new SETexture(tilesBitmapData, "assets/GFX/tiles.png");
 		sprite = texture.getSprite(new Rectangle(0, 0, 0, 32));
 		var entity = new SimpleEntity(sprite);
-		game.addEntity(entity);
+		//Game.addEntity(entity);
+		Game.registerService(SimpleService.Instance);
 
+		Game.start();
 		initStage();
-	}
 
-	private function threadMethod(progress : Progress, parameters : Array<Dynamic>){
-		trace(parameters.length);
-		var bitmap : BitmapData = parameters[2];
-		trace(bitmap.getPixel(10, 10));
-		for (i in 0...100000000){
-				(progress.Value = i/100000000);
-		}
-		trace("f");
-	}
-
-	private function onComplete(){
-		trace("Complted");
 	}
 
 	private function clickEventHandler(event : MouseEvent){
-		
+		SimpleService.Instance.Flag = true;
 		//var bitmapData = Assets.getBitmapData("assets/GFX/tiles.png", false);
 		//bitmap.bitmapData = bitmapData;
 		//sprite.BitmapData = tilesBitmapData;
@@ -63,7 +45,7 @@ class Main extends Sprite {
 
 	private function update(event : Event){
 		//taskHandler.update();
-		game.update();
+		Game.update();
 		//var r = sprite.Rect;
 		//r.width = 300 * task.Progress.Value;
 		//sprite.Rect = r;

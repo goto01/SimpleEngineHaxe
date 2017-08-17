@@ -1,14 +1,10 @@
 package simpleEngine.core.taskSystem;
 
-class TaskHandler implements IService{
+class TaskHandler{
 	private var tasks : List<Task>;
 
 	public function new(){
 		tasks = new List<Task>();
-	}
-
-	public function start(){
-
 	}
 
 	public function update(){

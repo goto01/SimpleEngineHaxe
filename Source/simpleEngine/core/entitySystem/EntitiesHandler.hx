@@ -2,7 +2,7 @@ package simpleEngine.core.entitySystem;
 
 class EntitiesHandler{
 	private var entities : List<IEntity>;
-	private var services : Map<Type.ValueType, IService>;
+	private var services : Map<Dynamic, IService>;
 
 	public function new(){
 		entities = new List<IEntity>();
@@ -37,5 +37,9 @@ class EntitiesHandler{
 
 	public function addEntity(entity : IEntity){
 		entities.add(entity);
+	}
+
+	public function registerService(service : IService){
+		services.set(Type.getClass(service), service);
 	}
 }
