@@ -23,11 +23,11 @@ class Main extends Sprite {
 		var bitmapTitle = Assets.getBitmapData("assets/GFX/title.png", false);
 		var tilesBitmapData = Assets.getBitmapData("assets/GFX/tiles.png", false);
 		
-		taskHandler = new TaskHandler();
-		task = taskHandler.startTask(threadMethod, onComplete, [1, "string123", bitmapTitle], 100);
+		
 		texture = new SETexture(tilesBitmapData, "assets/GFX/tiles.png");
 		sprite = texture.getSprite(new Rectangle(0, 0, 0, 32));
-		addChild(sprite.Bitmap);
+		var entity = new SimpleEntity(sprite);
+		game.addEntity(entity);
 
 		initStage();
 	}
@@ -62,11 +62,11 @@ class Main extends Sprite {
 	}
 
 	private function update(event : Event){
-		taskHandler.update();
+		//taskHandler.update();
 		game.update();
-		var r = sprite.Rect;
-		r.width = 300 * task.Progress.Value;
-		sprite.Rect = r;
+		//var r = sprite.Rect;
+		//r.width = 300 * task.Progress.Value;
+		//sprite.Rect = r;
 		//trace(Timer.stamp());
 		//sprite.X = 35 + Std.int(Math.sin(Timer.stamp()*10)*100);
 		//sprite.Y = 50 + Std.int(Math.cos(Timer.stamp()*10)*100);

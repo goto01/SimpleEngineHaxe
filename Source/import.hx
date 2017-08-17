@@ -14,6 +14,8 @@ import simpleEngine.core.resources.*;
 import simpleEngine.core.domain.*;
 import simpleEngine.core.taskSystem.*;
 
+import game.entities.*;
+
 import haxe.*;
 import flash.system.System;
 #if WINDOWS_BUILD
